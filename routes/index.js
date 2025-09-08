@@ -1,0 +1,27 @@
+const router = require("express").Router()
+
+const authorRouter = require("./author.route")
+const socialRouter = require("./social.route")
+const authorSocialRouter = require("./author_social.route")
+const authRouter = require("./auth.route") 
+const dictionaryRouter = require("./dictionary.route")
+const synonymRouter = require("./synonym.route")
+const descriptionRouter = require("./description.route")
+const categoryRouter = require("./category.route")
+const topicRouter = require("./topic.route")
+const userRouter = require("./user.route")
+const adminRouter = require("./admin.route")
+
+router.use("/auth", authRouter) 
+router.use("/author", authorRouter)
+router.use("/social", socialRouter)
+router.use("/author-social", authorSocialRouter)
+router.use("/dictionary", dictionaryRouter)
+router.use("/synonym", synonymRouter)
+router.use("/description", descriptionRouter)
+router.use("/category", categoryRouter)
+router.use("/topic", topicRouter)
+router.use("/user", userRouter)
+router.use("/admin", adminRouter)
+
+module.exports = router

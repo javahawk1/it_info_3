@@ -1,0 +1,9 @@
+{
+    "username": "postgres",
+    "password": "1234",
+    "database": "it_info",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 3000,
+    "secret_key": "MyVeryHardSecretKey"
+}
