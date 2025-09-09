@@ -31,10 +31,10 @@ const getAdminById = async (req, res) => {
 const addAdmin = async (req, res) => {
     try {
         const arr = [
-            "Admin_first_name",
-            "Admin_email",
-            "Admin_phone",
-            "Admin_password",
+            "admin_name",
+            "admin_email",
+            "admin_phone",
+            "admin_password",
         ];
 
         for (const i of arr) {
@@ -43,10 +43,10 @@ const addAdmin = async (req, res) => {
             }
         }
 
-        const { Admin_password } = req.body
-        const hashed_password = await bcrypt.hash(Admin_password, 7)
+        const { admin_password } = req.body
+        const hashed_password = await bcrypt.hash(admin_password, 7)
 
-        const data = await Admin.create({ ...req.body, Admin_password: hashed_password })
+        const data = await Admin.create({ ...req.body, admin_password: hashed_password })
 
         res.send({ message: "Admin created successfully", data })
     } catch (err) {
@@ -54,20 +54,28 @@ const addAdmin = async (req, res) => {
     }
 }
 
-const upadateAdmin = async (req, res) => {
+const updateAdmin = async (req, res) => {
     try {
         const id = req.params.id
-        const data = await Admin.update(req.body, { where: { id }, returning: true })
 
-        if (!data[0]) {
-            return res.status(404).send({ "message": "Admin not found" })
+        const [count, rows] = await Admin.update(req.body, {
+            where: { id },
+            returning: true
+        })
+
+        if (!count) {
+            return res.status(404).send({ message: "Admin not found" })
         }
 
-        res.send({ message: "Admin updated successfully", data })
+        res.send({ 
+            message: "Admin updated successfully", 
+            data: rows[0]
+        })
     } catch (err) {
         sendError(err, res)
     }
 }
+
 
 const deleteAdmin = async (req, res) => {
     try {
@@ -75,7 +83,7 @@ const deleteAdmin = async (req, res) => {
         const admin = await Admin.findByPk(id)
         const data = await Admin.destroy({ where: { id } })
 
-        if (!Admin) {
+        if (!admin) {
             return res.status(404).send({ message: "Admin not foudn" })
         }
 
@@ -90,6 +98,6 @@ module.exports = {
     getAllAdmins,
     addAdmin,
     getAdminById,
-    upadateAdmin,
+    updateAdmin,
     deleteAdmin
 }

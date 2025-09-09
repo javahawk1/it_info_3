@@ -31,9 +31,12 @@ const Admin = sequelize.define("Admin",
             defaultValue: true
         },
         admin_is_creator: {
-            type: DataTypes.STRING,
-            allowNull: false,
+            type: DataTypes.BOOLEAN,
         },
+        refresh_token: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     }, {
     tableName: "admin",
     timestamps: true

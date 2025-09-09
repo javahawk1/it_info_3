@@ -5,5 +5,6 @@
     "host": "localhost",
     "dialect": "postgres",
     "port": 3000,
-    "secret_key": "MyVeryHardSecretKey"
+    "access_secret": "myVeryHardAccessKey",
+    "refresh_secret": "myVeryHardRefreshKey"
 }
